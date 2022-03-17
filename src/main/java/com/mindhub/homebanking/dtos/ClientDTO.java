@@ -16,6 +16,8 @@ public class ClientDTO {
     private Set<AccountDTO> accounts = new HashSet<>();
     private Set<ClientLoanDTO> loans = new HashSet<>();
     private Set<CardDTO> cards = new HashSet<>();
+    private Set<ClientInvestDTO> invests = new HashSet<>();
+
 
     //Constructores
 
@@ -31,6 +33,8 @@ public class ClientDTO {
         this.accounts = client.getAccounts().stream().map(AccountDTO::new).collect(Collectors.toSet());
         this.loans = client.getClientLoans().stream().map(ClientLoanDTO::new).collect(Collectors.toSet());
         this.cards = client.getCards().stream().map(CardDTO::new).collect(Collectors.toSet());
+        this.invests = client.getClientInvests().stream().map(ClientInvestDTO::new).collect(Collectors.toSet());
+
     }
 
     //metodos

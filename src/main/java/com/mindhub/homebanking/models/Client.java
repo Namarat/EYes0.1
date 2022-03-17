@@ -1,6 +1,7 @@
 package com.mindhub.homebanking.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mindhub.homebanking.dtos.ClientLoanDTO;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.HashSet;
@@ -24,17 +25,21 @@ public class Client {
     private String lastName;
     private String email;
     private String password;
+    //private RiskType clientRisk;
 
     //foreign key  un cliente a muchas cuentas bancarias
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Account> accounts = new HashSet<>();
-
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<ClientLoan> clientLoans = new HashSet<>();
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Card> cards = new HashSet<>();
+
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<ClientInvest> clientInvests = new HashSet<>();
+
 
     //Constructores
 
@@ -44,10 +49,13 @@ public class Client {
 
     //sin el atributo id
     public Client(String firstName, String lastName, String email, String password) {
+        //RiskType risk
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        //this.clientRisk = clientRisk;
+
     }
 
     //Metodos get y set
@@ -97,6 +105,16 @@ public class Client {
         this.email = email;
     }
 
+    /*
+    public RiskType getClientRisk() {
+        return clientRisk;
+    }
+
+
+    public void setClientRisk(RiskType clientRisk) {
+        this.clientRisk = clientRisk;
+    }
+*/
     public Set<Account> getAccounts() {
         return accounts;
     }
@@ -112,6 +130,15 @@ public class Client {
     public void setClientLoans(Set<ClientLoan> clientLoans) {
         this.clientLoans = clientLoans;
     }
+
+    public Set<ClientInvest> getClientInvests() {
+        return clientInvests;
+    }
+
+    public void setClientInvests(Set<ClientInvest> clientInvests) {
+        this.clientInvests = clientInvests;
+    }
+
     public void addAccount(Account account) {
         account.setClient(this);
         accounts.add(account);
@@ -123,6 +150,12 @@ public class Client {
         clientLoan.setClient(this);
         clientLoans.add(clientLoan);
     }
+
+    public void addClientInvest(ClientInvest clientInvest) {
+        clientInvest.setClient(this);
+        clientInvests.add(clientInvest);
+    }
+
 
     @JsonIgnore
     public List<Loan> getLoans(){
