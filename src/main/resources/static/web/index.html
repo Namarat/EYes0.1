@@ -1,100 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>V Bank</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+
+  <link rel="stylesheet" href="assets/css/index.css">
+
+  <title>EY(ES) Chile – Inicio</title>
 </head>
-<body class="index-body">
-<div id="app">
-    <div class="toast-container position-absolute p-3 top-0 end-0" id="toastPlacement">
-        <div id="danger-toast" data-bs-delay="2000" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    {{ errorMsg }}
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="assets/img/ojo.jpg" alt="icono" width="45" height="">
+      </a>
+      <a class="navbar-brand" href="#">EY.ES</a>
+
+
+
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+
+
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#Quienes-Somos">Quienes Somos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#Productos">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#Contacto">Contacto</a>
+        </li>
+      </ul>
+
+
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+          <li class="nav-item">
+            <a class="nav-link active" href="/login.html">Banco en Linea</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" th:href="@{/(lang=es)}">Español</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active"><img src="./assets/img/españa.png" alt="" width="40px"></a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link active" th:href="@{/(lang=en)}">English</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active"><img src="./assets/img/UK.png" alt="" width="30px"></a>
+        </li>
+        </ul>
+
+      </div>
     </div>
-    <div class="container index-container">
-        <div class="row justify-content-center">
-            <div class="col-md-12 col-lg-10">
-                <div class="wrap d-md-flex justify-content-center bg-light shadow">
-                    <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last welcome shadow-sm">
-                        <div class="text w-100">
-                            <img class="welcome-logo" src="img/logo vinotinto.png">
-                            <h2>Welcome to V Bank</h2>
-                            <template v-if="!showSignUp">
-                                <p>Don't have an account?</p>
-                                <button v-on:click="showSignUpToogle" class="btn btn-light">Sign Up</button>
-                            </template>
-                        </div>
-                    </div>
-                    <div class="login-wrap p-4 p-lg-5">
-                        <template v-if="!showSignUp">
-                            <div class="d-flex">
-                                <div class="w-100">
-                                    <h3 class="mb-4">Sign In</h3>
-                                </div>
-                            </div>
-                            <form action="#" class="signin-form" v-on:submit="signIn($event)">
-                                <div class="form-group mb-3">
-                                    <label class="label" for="email">Email</label>
-                                    <input v-model="email" id="email" type="email" class="form-control" placeholder="email@mail.com" required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="label" for="password">Password</label>
-                                    <input v-model="password" id="password" type="password" class="form-control" placeholder="Password" required autocomplete="off">
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="form-control btn btn-primary px-3">Sign In</button>
-                                </div>
-                            </form>
-                        </template>
-                        <template v-else>
-                            <div class="d-flex">
-                                <div class="w-100">
-                                    <h3 class="mb-4">Sign Up</h3>
-                                </div>
-                            </div>
-                            <form action="#" class="signout-form" v-on:submit="signUp($event)">
-                                <div class="form-group mb-3">
-                                    <label class="label" for="firstName">First name</label>
-                                    <input v-model="firstName" id="firstName" type="text" class="form-control" placeholder="Juan" required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="lastName" for="lastName">Last name</label>
-                                    <input v-model="lastName" id="lastName" type="text" class="form-control" placeholder="Martinez" required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="label" for="remail">Email</label>
-                                    <input v-model="email" id="remail" type="remail" class="form-control" placeholder="email@mail.com" required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="label" for="rpassword">Password</label>
-                                    <input v-model="password" id="rpassword" type="password" class="form-control" placeholder="Password" required autocomplete="off">
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="form-control btn btn-primary px-3">Sign Up</button>
-                                    <a v-on:click="showSignUpToogle" href="#" class="link-secondary"><small>cancel</small></a>
-                                </div>
-                            </form>
-                        </template>
-                    </div>
-                </div>
-            </div>
-        </div>
+  </nav>
+
+
+  <div id="carouselExampleControls" class="carousel slide carr" data-bs-ride="carousel">
+
+    <div class="carousel-inner col-lg-12 ">
+      <div class="carousel-item active">
+        <img src="assets/img/carr1.jpg" class="d-block w-100" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/img/carr2.jpg" class="d-block w-100" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/img/carr3.jpg" class="d-block w-100" alt="">
+      </div>
+
     </div>
-</div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-<script src="js/index.js"></script>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <section id="Quienes-Somos" class="pt-5 container-fluid d-none d-sm-block">
+
+    <div class="container">
+      <div class="row">
+        <h4 class="text-center mb-4" id="Quienes">¿Quienes Somos?</h4>
+        <hr class="opacity-100">
+      </div>
+
+      <div class="row pt-4">
+
+        <div class="col-12 col-sm-4">
+          <div class="row iconos fa-2x mx-1">
+            <i class="fas fa-plane  text-center my-1"></i>
+          </div>
+          <p class="mx-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam voluptate numquam commodi ipsa
+            quibusdam
+            eos harum officia minima, ducimus sint esse deleniti necessitatibus qui magni modi consequatur eligendi
+            quisquam recusandae. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur blanditiis
+            veritatis adipisci deleniti nesciunt tenetur est quos quod distinctio, labore ipsam temporibus tempora fuga
+            nisi dolore eaque hic a recusandae?</p>
+        </div>
+
+        <div class="col-12 col-sm-4">
+          <p class="mx-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam voluptate numquam commodi ipsa
+            quibusdam
+            eos harum officia minima, ducimus sint esse deleniti necessitatibus qui magni modi consequatur eligendi
+            quisquam recusandae. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur blanditiis
+            veritatis adipisci deleniti nesciunt tenetur est quos quod distinctio, labore ipsam temporibus tempora fuga
+            nisi dolore eaque hic a recusandae?</p>
+          <div class="row iconos fa-2x mx-1">
+            <i class="fas fa-mountain text-center my-1"></i>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-4">
+          <div class="row iconos fa-2x mx-1">
+            <i class="fas fa-route text-center my-1"></i>
+          </div>
+          <p class="mx-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam voluptate numquam commodi ipsa
+            quibusdam
+            eos harum officia minima, ducimus sint esse deleniti necessitatibus qui magni modi consequatur eligendi
+            quisquam recusandae. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur blanditiis
+            veritatis adipisci deleniti nesciunt tenetur est quos quod distinctio, labore ipsam temporibus tempora fuga
+            nisi dolore eaque hic a recusandae?</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="Productos" class="py-5">
+    <div class="container">
+      <h4 class="text-center mt-2">Conoce las ofertas que hemos pensado para ti</h4>
+      <hr class="opacity-100">
+    </div>
+    <div class="container">
+      <div class="row mx-1">
+        <div class="col-sm-12 col-md-6 col-lg-4 my-3">
+          <div class="card border-0 dest">
+            <img src="assets/img/prestamo1.jpg" alt="Torres del Paine" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title my-2">Prestamos Personales</h5>
+              <p class="card-text fw-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. In exercitationem
+                possimus ea, iure natus, voluptatum magnio.</p>
+              <a href="/login.html" class="btn btn-dark">Conoce más</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 my-3">
+          <div class="card border-0 dest">
+            <img src="assets/img/inmobiliario1.jpg" alt="Altiplano" class="card-img-top" height="170px">
+            <div class="card-body">
+              <h5 class="card-title my-2">Creditos Hipotecarios</h5>
+              <p class="card-text fw-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. In exercitationem
+                possimus ea, iure natus, voluptatum magni.</p>
+              <a href="/login.html" class="btn btn-dark">Conoce más</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 my-3">
+          <div class="card border-0 dest">
+            <img src="assets/img/automotriz5.jpg" alt="Salar de Atacama" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title my-2">Creditos automotrices</h5>
+              <p class="card-text fw-light ">Lorem ipsum dolor sit amet consectetur adipisicing elit. In exercitationem
+                possimus ea, iure natus, voluptatum magni.</p>
+              <a href="/login.html" class="btn btn-dark">Conoce más</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </section>
+
+  <section id="Contacto" class="Container text-white text-center py-5">
+    <div class=" container mb-5">
+      <h4>Contacto</h4>
+      <hr class="opacity-100">
+      <div>
+
+        <div class="container bg-white text-dark py-5 px-5 my-4">
+          <h5 class="py-5">Hola, gracias por contactarnos</h5>
+          <a target="_blank" href="https://rt0275pq9ws.typeform.com/to/r5CHZUlw">
+            <button class="btn bg-dark text-white mb-5">Comenzar</button>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer id="Footer" class="text-center text-white py-2">
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <a class="navbar-brand" href="#">
+            <img src="assets/img/ojo.jpg" alt="icono" width="45" height="55">
+          </a>
+        </div>
+        <div class="col-12 col-sm-6">
+          <a class="active m-2" aria-current="page" href="#">Conocenos</a>
+          <a class="active m-2" href="#">Normas</a>
+          <a class="active m-2" href="#">Filiales</a>
+          <a class="active m-2" href="#">Sitios Relacionados</a>
+          <a class="active m-2" href="#Contacto">Encuéntranos</a>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <p>We see beyond</p>
+        </div>
+
+        <div class="col-12 col-sm-6">
+          <a target="_blank" href="https://github.com/">
+            <i class="fab fa-github-square fa-3x mx-2"></i>
+          </a>
+          <a target="_blank" href="https://www.linkedin.com/">
+            <i class="fab fa-linkedin fa-3x mx-2"></i>
+          </a>
+          <a target="_blank" href="https://twitter.com/">
+            <i class="fab fa-twitter-square fa-3x mx-2"></i>
+          </a>
+          <a target="_blank" href="https://www.facebook.com/">
+            <i class="fab fa-facebook-square fa-3x mx-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="./assets/js/index.js"></script>
 </body>
+
 </html>
-<footer><b>&#169; Felipe Negrete</b></footer>
